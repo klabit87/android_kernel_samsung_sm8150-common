@@ -5229,12 +5229,9 @@ static void __exit exit_sdfat_fs(void)
 	unregister_filesystem(&sdfat_fs_type);
 
 #ifdef CONFIG_SDFAT_USE_FOR_EXFAT
-	err = register_filesystem(&exfat_fs_type);
-	if (err) {
-		pr_err("[SDFAT] failed to register for exfat filesystem\n");
-		goto error;
-	}
+	unregister_filesystem(&exfat_fs_type);
 #endif /* CONFIG_SDFAT_USE_FOR_EXFAT */
+	
 #ifdef CONFIG_SDFAT_USE_FOR_VFAT
 	unregister_filesystem(&vfat_fs_type);
 #endif /* CONFIG_SDFAT_USE_FOR_VFAT */
